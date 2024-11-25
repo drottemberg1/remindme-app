@@ -1,117 +1,249 @@
-# React ToDo App
 
-## Overview
+# Toptal RemindMe App
 
-The React ToDo App is a user-friendly task management application designed to help you stay organized and productive. It provides a soothing and visually appealing user interface, along with a range of features to enhance your task management experience.
+**Toptal RemindMe App** is a task reminder application built with a Laravel backend (using SQLite) and a React.js frontend. The app allows users to manage their reminders effectively.
 
-## API For Dummy API Calls
- https://jsonplaceholder.typicode.com/todos
+---
+
+## Stack
+
+- **Backend**: Laravel with SQLite  
+- **Frontend**: React.js  
+- **Backend Language**: PHP 8.2  
+- **Frontend Environment**: Node.js 18  
+
+---
 
 ## Features
 
-- **User-Friendly UI**: The app features a user-friendly and intuitive interface with soothing colors to create a pleasant user experience.
+### Backend:
+- RESTful API for managing reminders.
+- Token-based authentication with access and refresh tokens.
+- Scheduling system for automatic task reminders.
+- Unit-tested endpoints.
 
-- **Task Creation**: Users can easily create new tasks with titles, descriptions, due dates, and categories.
+### Frontend:
+- User-friendly React.js interface.
+- Real-time reminders and notifications.
+- Responsive design.
 
-- **Task Deletion**: Tasks can be deleted with a simple click, helping users remove completed or unnecessary items from their list.
+---
 
-- **Task Editing**: Users have the ability to edit task details, making it convenient to update task information as needed.
+## Backend Setup
 
-- **Task Alerts**: The app allows users to set alerts for their tasks, ensuring they never miss an important deadline.
+### Prerequisites
+- PHP 8.2
+- Composer
+- SQLite database
 
-- **User Account[Comming Soon]**: Users can create and manage their accounts. 
+### Steps to Set Up
 
-- **Dashboard**: The dashboard provides a quick overview of tasks and completion status.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/drottemberg1/remindme-laravel.git
+   cd remindme-laravel/src/
+   ```
 
-- **Pie Chart**: A pie chart visualization offers a visual representation of task distribution by category, improving user insight into their tasks.
+2. **Install dependencies**:
+   ```bash
+   composer install
+   ```
 
-## Hosted Link
-https://webguyashis-react-todo-project.netlify.app/
+3. **Set up environment variables**:
+   - Create a `.env` file at the root directory:
+     ```bash
+     cp .env.example .env
+     ```
+   - Create a `.env.testing` file for testing configurations.
 
-## Screenshots
-### Desktop View
-![home](https://github.com/WebGuyAshis/Todo-List-React-Project2/assets/126752768/5bfe363a-883a-4a4b-98c1-a0f416da7fb4)
+4. **Run migrations**:
+   ```bash
+   php artisan migrate
+   ```
 
-![dash](https://github.com/WebGuyAshis/Todo-List-React-Project2/assets/126752768/39da033a-43da-4c63-b992-c7b7a9aab9c3)
+5. **Seed the database**:
+   ```bash
+   php artisan db:seed --class=UserSeeder
+   ```
 
-![Task](https://github.com/WebGuyAshis/Todo-List-React-Project2/assets/126752768/a8939b0b-34ef-4a6e-8188-52ab1457b463)
+6. **Start the server**:
+   ```bash
+   php artisan serve
+   ```
 
-![Edit Tasks](https://github.com/WebGuyAshis/Todo-List-React-Project2/assets/126752768/9798d3cd-9ac6-41f8-8797-d573bb329140)
+7. **Start the scheduler**:
+   ```bash
+   php artisan schedule:work
+   ```
 
-### Mobile View
-![IMG-20231001-WA0000](https://github.com/WebGuyAshis/Todo-List-React-Project2/assets/126752768/65c6685a-46c5-4f96-9355-1fca619109c6)
+8. **Run automated tests**:
+   ```bash
+   php artisan test
+   ```
 
-![Screenshot_2023-10-01-03-12-05-480_com android chrome](https://github.com/WebGuyAshis/Todo-List-React-Project2/assets/126752768/abca6e28-4259-4113-8df7-cc876aa895c9)
+---
 
-![IMG-20231001-WA0001](https://github.com/WebGuyAshis/Todo-List-React-Project2/assets/126752768/5410eea5-61a5-418d-b62e-b9fd68c72cb9)
+### Sample `.env` File
+```env
+APP_NAME=RemindMe
+APP_ENV=local
+APP_KEY=base64:jY1NIoFpEkkTcpfhP3e2Zy7hKEQTCgeY6XSi+xjfCaw=
+APP_DEBUG=true
+APP_URL=http://localhost:8000
+FRONTEND_URL=http://localhost:3000
 
-# Getting Started with Create React App
+LOG_CHANNEL=stack
+LOG_DEPRECATIONS_CHANNEL=null
+LOG_LEVEL=debug
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+DB_CONNECTION=sqlite
 
-## Available Scripts
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+FILESYSTEM_DISK=local
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
 
-In the project directory, you can run:
+MAIL_MAILER=sendmail
+MAIL_HOST=localhost
+MAIL_PORT=25
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+MAIL_FROM_ADDRESS="admin@ezrv.org"
+MAIL_FROM_NAME="${APP_NAME}"
+MAIL_TO_OVERRIDE=david@ezrdv.org
 
-### `npm start`
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Sample `.env.testing` File
+```env
+APP_ENV=testing
+APP_KEY=base64:YOUR_APP_KEY_HERE
+APP_DEBUG=true
+APP_URL=http://localhost
 
-### `npm test`
+# Database connection for testing (use SQLite for speed and isolation)
+DB_CONNECTION=sqlite
+DB_DATABASE=:memory:
+DB_FOREIGN_KEYS=true
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Mail configuration for testing
+MAIL_MAILER=log
+MAIL_LOG_CHANNEL=stack
 
-### `npm run build`
+# Cache configuration
+CACHE_DRIVER=array
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=array
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# Other optional configurations
+BROADCAST_DRIVER=log
+LOG_CHANNEL=stack
+FILESYSTEM_DISK=local
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Frontend Setup
 
-### `npm run eject`
+### Prerequisites
+- Node.js 18
+- npm
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Steps to Set Up
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/drottemberg1/remindme-app.git
+   cd remindme-app
+   ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+3. **Start the frontend**:
+   ```bash
+   npm run
+   ```
+---
+### Setup `config/WTConfig.js` File
+Enter  `API_URL` corresponding to the laravel endpoints. If you are running `php artisan serve` then it should be `http://localhost:8000/api` by default.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Project Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Backend
+```
+src/
+├── app/
+├── config/
+├── database/
+│   ├── factories/
+│   ├── migrations/
+│   ├── seeders/
+├── routes/
+│   ├── api.php
+│   ├── web.php
+├── tests/
+│   ├── Feature/
+│   ├── Unit/
+├── .env.example
+├── artisan
+└── composer.json
+```
 
-### Analyzing the Bundle Size
+### Frontend
+```
+remindme-app/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── config/
+│   ├── SDK/
+│   ├── App.jsx
+│   ├── index.js
+├── jsconfig.json
+└── package.json
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Testing
 
-### Advanced Configuration
+### Backend:
+Tests are written using PHPUnit. To run the tests:
+```bash
+php artisan test
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Frontend:
+React testing can be implemented using tools like Jest or React Testing Library.
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Notes
 
-### `npm run build` fails to minify
+- Ensure you have the correct versions of PHP, Composer, Node.js, and npm.
+- SQLite is used for both development and testing environments. Adjust `.env` files as needed.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+---
+
+## Contribution
+
+Feel free to contribute by submitting issues or pull requests. Fork the repository, make your changes, and create a pull request.
+
+---
+
+## License
+
+This project is licensed under the MIT License.
