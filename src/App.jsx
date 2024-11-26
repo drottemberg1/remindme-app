@@ -34,7 +34,7 @@ class AppComponent extends React.Component {
     window.hideLoader = hideLoader;
   }
 
-  //Loading configuration
+  //Loading configuration 1
   async connect(){
     try{
         await WTClient.getInstance().connect();
