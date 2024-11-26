@@ -34,7 +34,7 @@ class AppComponent extends React.Component {
     window.hideLoader = hideLoader;
   }
 
-
+  //Loading configuration
   async connect(){
     try{
         await WTClient.getInstance().connect();
@@ -57,6 +57,7 @@ class AppComponent extends React.Component {
   render() {
 
      if(this.state.isLoading){
+
        return <SpinnerApp size={SpinnerApp.Size.x4} />;
      }else{
 
