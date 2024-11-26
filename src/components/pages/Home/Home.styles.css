@@ -1,0 +1,51 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 93vh;
+    gap: 10px;
+    padding: 0 40px;
+}
+
+.home-page-content {
+    display: flex;
+    height: 100%;
+}
+
+
+/* Welcome Page Logo */
+.wel-page-img {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    background-image: url('../../../assets/images/todo.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+.responsive-img {
+    display: none;
+}
+
+/* Media Queries */
+
+@media screen and (max-width:920px) {
+    .home-page-content {
+        flex-direction: column-reverse;
+    }
+
+    .wel-page-img {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width:500px) {
+
+    .home-page {
+        padding: 0 10px;
+    }
+}

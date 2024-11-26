@@ -18,6 +18,10 @@ export class WTUtils {
     }
   }
 
+  static timeout = (ms) => {
+    return new Promise((resolve, _) => setTimeout(() => resolve(), ms));
+  }
+
   static getLocalStorage = (name) => {
     try {
       const value = window.localStorage.getItem(name);

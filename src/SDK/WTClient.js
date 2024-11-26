@@ -112,6 +112,18 @@ async connect (callback) {
 
   }
 
+  async login(email, password){
+    var params = {email,password};
+    const data = await this.postAPI('session', params);
+    this.initWithData(data);
+    this.triggerEvent(WTEvent.app_connect);
+  }
+
+  async register(name, email, password){
+    var params = {name, email,password};
+    const data = await this.postAPI('user', params);
+  }
+
 
 getAPI (method, params, progress) {
     return this.genAPI (method, "get", params, progress);
@@ -197,6 +209,10 @@ genAPI (method, type, params, progress) {
         } else {
           if ('data' in data && data.data.access_token) {
             self.setAuthToken(data.data.access_token);
+            self.authenticated = true;
+          }
+          if ('data' in data && data.data.refresh_token) {
+            self.setRefreshToken(data.data.refresh_token);
             self.authenticated = true;
           }
 

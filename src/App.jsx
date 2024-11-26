@@ -1,16 +1,14 @@
 import { createContext, useEffect, useState } from "react";
 import {ProtectedRoute,ConditionalRoute} from "./components/routing";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
-import DashboardPage from "./components/DashboardPage";
-import Footer from "./components/Footer";
+import { Home, DashboardPage, About, SignUp, SignIn } from "./components/pages";
+import { Footer, Navbar, SpinnerApp, showLoader, hideLoader } from "./components/main";
 import React from "react";
 // For Notifications
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // minified version is also included
 import "react-toastify/dist/ReactToastify.min.css";
-import About from "./components/About";
 
 import { WTClient } from "SDK"
 
@@ -32,6 +30,8 @@ class AppComponent extends React.Component {
     this.connect();
 
 
+    window.showLoader = showLoader;
+    window.hideLoader = hideLoader;
   }
 
 
@@ -41,11 +41,11 @@ class AppComponent extends React.Component {
     }catch(e){
 
     }finally{
-      this.setState({
-        isLoading:false
-      },()=>{
-        }
-      );
+       this.setState({
+         isLoading:false
+       },()=>{
+         }
+       );
     }
   }
 
@@ -57,7 +57,7 @@ class AppComponent extends React.Component {
   render() {
 
      if(this.state.isLoading){
-       return "LOADING";
+       return <SpinnerApp size={SpinnerApp.Size.x4} />;
      }else{
 
 
@@ -122,6 +122,7 @@ class AppComponent extends React.Component {
           <ToastContainer />
             {/* <Home/> */}
             <Router>
+            {!WTClient.getInstance().authenticated && <Navbar />}
               <Routes>
               <Route path="/" element=
                   {<ConditionalRoute
@@ -129,6 +130,18 @@ class AppComponent extends React.Component {
                     Component={Home}
                   />}
               />
+                <Route path="/signup" element=
+                  {<ConditionalRoute
+                    isAuthenticated={authenticated}
+                    Component={SignUp}
+                  />}
+                />
+                <Route path="/signin" element=
+                  {<ConditionalRoute
+                    isAuthenticated={authenticated}
+                    Component={SignIn}
+                  />}
+                />
                 <Route path="/dashboard" element=
                     {<ProtectedRoute
                       isAuthenticated={authenticated}

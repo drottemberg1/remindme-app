@@ -1,0 +1,35 @@
+.email-input-container {
+    position: relative;
+    width: 100%;
+}
+
+.email-input-label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.email-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.email-input:focus {
+    border-color: #007bff;
+}
+
+.email-input-error {
+    border-color: red;
+}
+
+.email-input-error-text {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
